@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Annexio.Models.Country>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Region)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Subregion)
+        </th>
+    </tr>
+
+@foreach (var country in Model) {
+    <tr class="info">
+        <td>
+            @Html.DisplayFor(modelItem => country.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => country.Region)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => country.Subregion)
+        </td>    
+    </tr>
+}
+
+</table>
