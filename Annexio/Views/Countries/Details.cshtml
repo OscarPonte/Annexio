@@ -1,0 +1,65 @@
+﻿@model Annexio.Models.Country
+
+<div>
+    <h4>Country</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Capital)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Capital)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Population)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Population)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Currencies)
+        </dt>
+        @foreach (var c in Model.Currencies)
+        {
+            <dd>
+                @Html.DisplayFor(model => c.Name)
+            </dd>
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Languages)
+        </dt>
+        @foreach (var l in Model.Languages)
+        {
+            <dd>
+                @Html.DisplayFor(model => l.Name)
+            </dd>
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Borders)
+        </dt>
+        @foreach (var b in Model.Borders)
+        {
+            <dd>
+                @Html.DisplayFor(model => b)
+            </dd>
+        }
+
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,5 +1,6 @@
 ﻿using Annexio.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Annexio.Tests.Controllers
@@ -14,7 +15,7 @@ namespace Annexio.Tests.Controllers
             var controller = new CountriesController();
 
             // Act
-            var result = controller.Index() as ViewResult;
+            var result = controller.Index() as Task<ViewResult>;
 
             // Assert
             Assert.IsNotNull(result);

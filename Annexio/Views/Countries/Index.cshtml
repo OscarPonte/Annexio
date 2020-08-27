@@ -20,6 +20,9 @@
 @foreach (var country in Model) {
     <tr class="info">
         <td>
+            @Html.ActionLink(country.Name, "Details", new { name = country.Name })
+
+
             @Html.DisplayFor(modelItem => country.Name)
         </td>
         <td>

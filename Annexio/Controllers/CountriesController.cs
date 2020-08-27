@@ -1,42 +1,74 @@
 ﻿using Annexio.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Annexio.Controllers
 {
     public class CountriesController : Controller
-    {
+    {    
         // GET: Countries
-        public ActionResult Index()
+        public async Task<ViewResult> Index()
+        {
+            var countries = await GetCountriesAsync();
+            
+
+            return View(countries);
+        }
+
+        public async Task<ViewResult> Details(string name)
+        {
+            var country = await GetCountryByNameAsync(name);
+
+                return View(country);
+        }
+
+
+        private static async Task<IEnumerable<Country>> GetCountriesAsync()
         {
             IEnumerable<Country> countries = null;
 
             using (var client = new HttpClient())
             {
-                var responseTask = client.GetAsync(new Uri("https://restcountries.eu/rest/v2/all"));
-                responseTask.Wait();
-
-                var result = responseTask.Result;
-                if (result.IsSuccessStatusCode)
+                var responseTask = await client.GetAsync(new Uri("https://restcountries.eu/rest/v2/all"));
+                
+                if (responseTask.IsSuccessStatusCode)
                 {
-                    var readTask = result.Content.ReadAsAsync<IEnumerable<Country>>();
-                    readTask.Wait();
-
-                    countries = readTask.Result;
+                    countries = await responseTask.Content.ReadAsAsync<IEnumerable<Country>>();         
                 }
                 else
                 {
-                    countries = Enumerable.Empty<Country>();
-
-                    ModelState.AddModelError(string.Empty, "Server error.");
+                    countries = new List<Country>();
                 }
             }
 
-            return View(countries);
+            return countries;
+            }
+
+        private static async Task<Country> GetCountryByNameAsync(string name)
+        {
+            using (var client = new HttpClient())
+            {
+                var responseTask = await client.GetAsync(new Uri("https://restcountries.eu/rest/v2/name/" + name));
+
+                var result = await responseTask.Content.ReadAsStringAsync();
+
+
+                if (responseTask.IsSuccessStatusCode)
+                {       
+                    return JsonConvert.DeserializeObject<List<Country>>(result).FirstOrDefault();
+                }
+                else
+                {
+                    return new Country();
+                }
+            }
         }
+
 
 
     }
