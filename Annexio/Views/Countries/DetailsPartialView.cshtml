@@ -1,0 +1,58 @@
+﻿@model Annexio.Models.Country
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Capital)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Capital)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Population)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Population)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Currencies)
+        </dt>
+        @foreach (var c in Model.Currencies)
+        {
+            <dd>
+                @Html.DisplayFor(model => c.Name)
+            </dd>
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Languages)
+        </dt>
+        @foreach (var l in Model.Languages)
+        {
+            <dd>
+                @Html.DisplayFor(model => l.Name)
+            </dd>
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Borders)
+        </dt>
+        @foreach (var b in Model.Borders)
+        {
+            <dd>
+                @Html.ActionLink(b, "DetailsByCode", new { code = b})
+            </dd>
+        }
+
+    </dl>
+</div>
+

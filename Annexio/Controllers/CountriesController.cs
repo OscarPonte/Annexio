@@ -1,4 +1,5 @@
 ﻿using Annexio.Models;
+using Microsoft.Ajax.Utilities;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,21 +11,25 @@ using System.Web.Mvc;
 namespace Annexio.Controllers
 {
     public class CountriesController : Controller
-    {    
+    {
         // GET: Countries
         public async Task<ViewResult> Index()
         {
             var countries = await GetCountriesAsync();
-            
 
             return View(countries);
         }
 
         public async Task<ViewResult> Details(string name)
-        {
-            var country = await GetCountryByNameAsync(name);
+        {                        
+                return View(await GetCountryByNameAsync(name)); 
+        }
 
-                return View(country);
+        public async Task<ViewResult> DetailsByCode(string code)
+        {
+            var country = await GetCountryByCodeAsync(code);
+
+            return View(country);
         }
 
 
@@ -35,10 +40,10 @@ namespace Annexio.Controllers
             using (var client = new HttpClient())
             {
                 var responseTask = await client.GetAsync(new Uri("https://restcountries.eu/rest/v2/all"));
-                
+
                 if (responseTask.IsSuccessStatusCode)
                 {
-                    countries = await responseTask.Content.ReadAsAsync<IEnumerable<Country>>();         
+                    countries = await responseTask.Content.ReadAsAsync<IEnumerable<Country>>();
                 }
                 else
                 {
@@ -47,7 +52,7 @@ namespace Annexio.Controllers
             }
 
             return countries;
-            }
+        }
 
         private static async Task<Country> GetCountryByNameAsync(string name)
         {
@@ -59,8 +64,28 @@ namespace Annexio.Controllers
 
 
                 if (responseTask.IsSuccessStatusCode)
-                {       
+                {
                     return JsonConvert.DeserializeObject<List<Country>>(result).FirstOrDefault();
+                }
+                else
+                {
+                    return new Country();
+                }
+            }
+        }
+
+        private static async Task<Country> GetCountryByCodeAsync(string code)
+        {
+            using (var client = new HttpClient())
+            {
+                var responseTask = await client.GetAsync(new Uri("https://restcountries.eu/rest/v2/alpha/" + code));
+
+                var result = await responseTask.Content.ReadAsStringAsync();
+
+
+                if (responseTask.IsSuccessStatusCode)
+                {
+                    return JsonConvert.DeserializeObject<Country>(result);
                 }
                 else
                 {
