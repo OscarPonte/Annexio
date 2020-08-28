@@ -23,10 +23,10 @@
             @Html.ActionLink(country.Name, "Details", new { name = country.Name })
         </td>
         <td>
-            <a href=@Url.Action("RegionDetails", new { regionName = country.Region })>@country.Region</a>
+            <a href=@Url.Action("RegionDetails", "Regions", new { regionName = country.Region })>@country.Region</a>
         </td>
         <td>
-            <a href=@Url.Action("SubregionDetails", new { subregionName = country.Subregion })>@country.Subregion</a>
+            <a href=@Url.Action("SubregionDetails", "Subregions", new { subregionName = country.Subregion })>@country.Subregion</a>
         </td>    
     </tr>
 }

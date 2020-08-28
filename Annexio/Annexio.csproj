@@ -130,6 +130,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\HttpClients\CountriesHttpClient.cs" />
+    <Compile Include="Controllers\HttpClients\RegionsHttpClient.cs" />
+    <Compile Include="Controllers\HttpClients\SubregionsHttpClient.cs" />
+    <Compile Include="Controllers\RegionsController.cs" />
+    <Compile Include="Controllers\SubregionsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -174,8 +178,8 @@
     <Content Include="Views\Countries\DetailsPartialView.cshtml" />
     <Content Include="Views\Countries\DetailsByCode.cshtml" />
     <Content Include="Views\Countries\Details.cshtml" />
-    <Content Include="Views\Countries\RegionDetails.cshtml" />
-    <Content Include="Views\Countries\SubregionDetails.cshtml" />
+    <Content Include="Views\Regions\RegionDetails.cshtml" />
+    <Content Include="Views\Subregions\SubregionDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

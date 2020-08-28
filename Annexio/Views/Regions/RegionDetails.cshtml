@@ -28,7 +28,7 @@
         @foreach (var country in Model.Countries)
         {
             <dd>
-                @Html.ActionLink(country.Name, "Details", new { name = country.Name })
+                @Html.ActionLink(country.Name, "Details", "Countries", new { name = country.Name }, null)
             </dd>
         }
 
@@ -38,7 +38,7 @@
         @foreach (var subregion in Model.Subregions)
         {
             <dd>
-                <a href=@Url.Action("SubregionDetails", new { subregionName = subregion })>@subregion</a>
+                <a href=@Url.Action("SubregionDetails", "Subregions", new { subregionName = subregion }, null)>@subregion</a>
             </dd>
         }
 

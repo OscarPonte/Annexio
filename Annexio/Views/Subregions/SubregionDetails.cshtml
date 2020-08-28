@@ -26,7 +26,7 @@
             @Html.DisplayNameFor(model => model.Region)
         </dt>
         <dd>
-            <a href=@Url.Action("RegionDetails", new { regionName = Model.Region })>@Model.Region</a>
+            <a href=@Url.Action("RegionDetails", "Regions", new { regionName = Model.Region }, null)>@Model.Region</a>
         </dd>
 
         <dt>
@@ -35,7 +35,7 @@
         @foreach (var country in Model.Countries)
         {
             <dd>
-                @Html.ActionLink(country.Name, "Details", new { name = country.Name})
+                @Html.ActionLink(country.Name, "Details", "Countries", new { name = country.Name}, null)
             </dd>
         }
 
