@@ -1,6 +1,7 @@
 ﻿using Annexio.CountiresUriBuilder;
 using Annexio.Models;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -10,42 +11,40 @@ namespace Annexio.Controllers.HttpClients
 {
     public class CountriesHttpClient
     {
-        public async Task<IEnumerable<Country>> GetCountriesAsync()
+        private readonly CountriesUriBuilder _uri;
+
+        public CountriesHttpClient()
         {
-            IEnumerable<Country> countries = null;
+            _uri = new CountriesUriBuilder();
+        }
 
-            var _uri = new CountriesUriBuilder();
-
+        public async Task<IEnumerable<Country>> GetCountriesAsync()
+        {      
             using (var client = new HttpClient())
             {
                 var responseTask = await client.GetAsync(_uri.GetAllCountries());
-
+                         
                 if (responseTask.IsSuccessStatusCode)
                 {
-                    countries = await responseTask.Content.ReadAsAsync<IEnumerable<Country>>();
+                    return await responseTask.Content.ReadAsAsync<IEnumerable<Country>>();
                 }
                 else
                 {
-                    countries = new List<Country>();
+                    return new List<Country>();
                 }
-            }
-            return countries;
+            }          
         }
 
         public async Task<Country> GetCountryByNameAsync(string name)
-        {
-            var _uri = new CountriesUriBuilder();
+        {          
 
             using (var client = new HttpClient())
             {
-
                 var responseTask = await client.GetAsync(_uri.GetCountryByName(name));
 
-                var result = await responseTask.Content.ReadAsStringAsync();
-
-
                 if (responseTask.IsSuccessStatusCode)
-                {
+                { 
+                    var result = await responseTask.Content.ReadAsStringAsync();
                     return JsonConvert.DeserializeObject<List<Country>>(result).FirstOrDefault();
                 }
                 else
@@ -56,23 +55,46 @@ namespace Annexio.Controllers.HttpClients
         }
 
         public async Task<Country> GetCountryByCodeAsync(string code)
-        {
-            var _uri = new CountriesUriBuilder();
-
+        {           
             using (var client = new HttpClient())
             {
                 var responseTask = await client.GetAsync(_uri.GetCountryByCode(code));
 
-                var result = await responseTask.Content.ReadAsStringAsync();
-
-
                 if (responseTask.IsSuccessStatusCode)
                 {
+                    var result = await responseTask.Content.ReadAsStringAsync();
                     return JsonConvert.DeserializeObject<Country>(result);
                 }
                 else
                 {
                     return new Country();
+                }
+            }
+        }
+
+        public async Task<Region> GetRegionDetailsAsync(string regionName)
+        {
+            using (var client = new HttpClient())
+            {
+                var responseTask = await client.GetAsync(_uri.GetRegion(regionName));
+                
+               
+            if (responseTask.IsSuccessStatusCode)
+            {
+                    var result = await responseTask.Content.ReadAsStringAsync();
+                    var listOfCountries = JsonConvert.DeserializeObject<IEnumerable<Country>>(result); 
+                    var region = new Region
+                    {                       
+                        Name = regionName,
+                        Population = listOfCountries.Select(p => p.Population).Sum(),
+                        Countries = listOfCountries,
+                        Subregions = listOfCountries.Select(s => s.Subregion).Distinct()    
+                    };
+                    return region;
+            }      
+            else
+                {
+                    throw new ArgumentOutOfRangeException();
                 }
             }
         }

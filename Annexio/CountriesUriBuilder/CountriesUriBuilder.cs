@@ -32,6 +32,13 @@ namespace Annexio.CountiresUriBuilder
             return uriBuilder.Uri;
         }
 
+        public Uri GetRegion(string region)
+        {
+            uriBuilder.Path = "/rest/v2/region/" + region;
+
+            return uriBuilder.Uri;
+        }
+
 
     }
 }

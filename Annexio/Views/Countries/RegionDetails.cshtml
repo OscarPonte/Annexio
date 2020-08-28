@@ -1,0 +1,42 @@
+﻿@model Annexio.Models.Region
+
+@{
+    ViewBag.Title = "RegionDetails";
+}
+
+<h2>Region Details</h2>
+
+<div>
+    <hr />
+    <h4>@Model.Name</h4>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Population)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Population)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Countries)
+        </dt>
+        @foreach (var c in Model.Countries)
+        {
+            <dd>
+                @Html.DisplayFor(n => c.Name);
+            </dd>
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Subregions)
+        </dt>
+        @foreach (var s in Model.Subregions)
+        {
+            <dd>
+                @s
+            </dd>
+        }
+
+    </dl>
+</div>
+

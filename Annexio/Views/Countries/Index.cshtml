@@ -23,7 +23,7 @@
             @Html.ActionLink(country.Name, "Details", new { name = country.Name })
         </td>
         <td>
-            @Html.DisplayFor(modelItem => country.Region)
+            <a href=@Url.Action("RegionDetails", new { regionName = country.Region })>@country.Region</a>
         </td>
         <td>
             @Html.DisplayFor(modelItem => country.Subregion)

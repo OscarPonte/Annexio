@@ -6,7 +6,6 @@ namespace Annexio.Controllers
 {
     public class CountriesController : Controller
     {
-
         public async Task<ViewResult> Index()
         {
             var countries = await new CountriesHttpClient().GetCountriesAsync();                 
@@ -16,9 +15,9 @@ namespace Annexio.Controllers
 
         public async Task<ViewResult> Details(string name)
         {
-            var countries = await new CountriesHttpClient().GetCountryByNameAsync(name);
+            var country = await new CountriesHttpClient().GetCountryByNameAsync(name);
 
-            return View(countries);
+            return View(country);
         }
 
         public async Task<ViewResult> DetailsByCode(string code)
@@ -28,6 +27,12 @@ namespace Annexio.Controllers
             return View(country);
         }
 
+       public async Task<ViewResult> RegionDetails(string regionName)
+        {
+            var region = await new CountriesHttpClient().GetRegionDetailsAsync(regionName);
+
+            return View(region);
+        }
 
 
 

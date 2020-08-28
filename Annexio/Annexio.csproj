@@ -136,6 +136,7 @@
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Currency.cs" />
     <Compile Include="Models\Language.cs" />
+    <Compile Include="Models\Region.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CountriesUriBuilder\CountriesUriBuilder.cs" />
   </ItemGroup>
@@ -172,6 +173,7 @@
     <Content Include="Views\Countries\DetailsPartialView.cshtml" />
     <Content Include="Views\Countries\DetailsByCode.cshtml" />
     <Content Include="Views\Countries\Details.cshtml" />
+    <Content Include="Views\Countries\RegionDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
