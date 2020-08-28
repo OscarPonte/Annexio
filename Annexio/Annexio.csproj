@@ -48,6 +48,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -128,13 +129,21 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CountriesController.cs" />
+    <Compile Include="Controllers\HttpClients\CountriesHttpClient.cs" />
+    <Compile Include="Controllers\HttpClients\RegionsHttpClient.cs" />
+    <Compile Include="Controllers\HttpClients\SubregionsHttpClient.cs" />
+    <Compile Include="Controllers\RegionsController.cs" />
+    <Compile Include="Controllers\SubregionsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Currency.cs" />
     <Compile Include="Models\Language.cs" />
+    <Compile Include="Models\Region.cs" />
+    <Compile Include="Models\Subregion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CountriesUriBuilder\CountriesUriBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -169,6 +178,8 @@
     <Content Include="Views\Countries\DetailsPartialView.cshtml" />
     <Content Include="Views\Countries\DetailsByCode.cshtml" />
     <Content Include="Views\Countries\Details.cshtml" />
+    <Content Include="Views\Regions\RegionDetails.cshtml" />
+    <Content Include="Views\Subregions\SubregionDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
