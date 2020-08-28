@@ -5,11 +5,16 @@
 }
 
 <h2>Region Details</h2>
-
-<div>
-    <hr />
-    <h4>@Model.Name</h4>
+<hr />
+<div>    
     <dl class="dl-horizontal">
+        <dt>
+        @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.Population)
         </dt>
@@ -20,20 +25,20 @@
         <dt>
             @Html.DisplayNameFor(model => model.Countries)
         </dt>
-        @foreach (var c in Model.Countries)
+        @foreach (var country in Model.Countries)
         {
             <dd>
-                @Html.DisplayFor(n => c.Name);
+                @Html.ActionLink(country.Name, "Details", new { name = country.Name })
             </dd>
         }
 
         <dt>
             @Html.DisplayNameFor(model => model.Subregions)
         </dt>
-        @foreach (var s in Model.Subregions)
+        @foreach (var subregion in Model.Subregions)
         {
             <dd>
-                @s
+                <a href=@Url.Action("SubregionDetails", new { subregionName = subregion })>@subregion</a>
             </dd>
         }
 

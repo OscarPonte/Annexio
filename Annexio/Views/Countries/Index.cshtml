@@ -26,7 +26,7 @@
             <a href=@Url.Action("RegionDetails", new { regionName = country.Region })>@country.Region</a>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => country.Subregion)
+            <a href=@Url.Action("SubregionDetails", new { subregionName = country.Subregion })>@country.Subregion</a>
         </td>    
     </tr>
 }

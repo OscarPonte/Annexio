@@ -34,6 +34,12 @@ namespace Annexio.Controllers
             return View(region);
         }
 
+        public async Task<ViewResult> SubregionDetails(string subregionName)
+        {
+            var subregion = await new CountriesHttpClient().GetSubregionDetailsAsync(subregionName);
+
+            return View(subregion);
+        }
 
 
 
