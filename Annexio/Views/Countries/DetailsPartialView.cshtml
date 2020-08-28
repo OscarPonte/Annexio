@@ -35,24 +35,24 @@
 
         <dt>
             @Html.DisplayNameFor(model => model.Languages)
-        </dt>
-        @foreach (var l in Model.Languages)
-        {
-            <dd>
-                @Html.DisplayFor(model => l.Name)
-            </dd>
-        }
+        </dt> 
+            @foreach (var l in Model.Languages)
+            {
+                <dd>
+                    @Html.DisplayFor(model => l.Name)
+                </dd>
+                }
 
         <dt>
             @Html.DisplayNameFor(model => model.Borders)
-        </dt>
-        @foreach (var b in Model.Borders)
-        {
-            <dd>
-                @Html.ActionLink(b, "DetailsByCode", new { code = b})
-            </dd>
-        }
-
+        </dt>        
+            @foreach (var b in Model.Borders)
+            {                
+                <dd>
+                    @Html.ActionLink(b, "DetailsByCode", new { code = b})
+                </dd>           
+                }
+        
     </dl>
 </div>
 
