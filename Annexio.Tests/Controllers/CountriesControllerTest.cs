@@ -1,24 +1,73 @@
 ﻿using Annexio.Controllers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Annexio.Repository.Manager;
+using Moq;
+using NUnit.Framework;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Annexio.Tests.Controllers
 {
-    [TestClass]
     public class CountriesControllerTest
     {
-        [TestMethod]
-        public void Index()
+        private Mock<ICountriesManager> _mock;
+        private CountriesController _controller;
+
+        [SetUp]
+        public void SetUp()
         {
-            //// Arrange
-            //var controller = new CountriesController();
-
-            //// Act
-            //var result = controller.Index() as Task<ViewResult>;
-
-            //// Assert
-            //Assert.IsNotNull(result);
+            _mock = new Mock<ICountriesManager>();
+            _controller = new CountriesController(_mock.Object);
         }
+
+        [Test]
+        public void CountriesController_Index_ReturnsATaskOfViewResult()
+        {
+            var result = _controller.Index();
+
+            Assert.IsInstanceOf<Task<ViewResult>>(result);
+        }
+
+        [Test]
+        public void CountriesController_Index_IsCallingGetAllCountriesMethod()
+        {
+            var result = _controller.Index();
+
+            _mock.Verify(c => c.GetAllCountries());
+        }
+
+        [Test]
+        public void CountriesController_Details_ReturnsATaskOfViewResult()
+        {
+            var result = _controller.Details("CountryName");
+
+            Assert.IsInstanceOf<Task<ViewResult>>(result);
+        }
+
+        [Test]
+        public void CountriesController_Details_IsCallingGetCountryDetailsByNameMethod()
+        {
+            var countryName = "CountryName";
+            var result = _controller.Details(countryName);
+
+            _mock.Verify(c => c.GetCountryDetailsByName(countryName));
+        }
+
+        [Test]
+        public void CountriesController_DetailsByCode_ReturnsATaskOfViewResult()
+        {
+            var result = _controller.DetailsByCode("CountryName");
+
+            Assert.IsInstanceOf<Task<ViewResult>>(result);
+        }
+
+        [Test]
+        public void CountriesController_DetailsByCode_IsCallingGetCountryDetailsByCodeMethod()
+        {
+            var countryCode = "CountryCode";
+            var result = _controller.DetailsByCode(countryCode);
+
+            _mock.Verify(c => c.GetCountryDetailsByCode(countryCode));
+        }
+
     }
 }
