@@ -18,7 +18,7 @@ namespace Annexio.Controllers.HttpClients
             this._countriesUriBuilder = countriesUriBuilder ?? throw new ArgumentNullException(nameof(countriesUriBuilder));
         }
 
-        public async Task<Region> GetRegionDetailsAsync(string regionName)
+        public async Task<IEnumerable<Country>> GetRegionDetailsAsync(string regionName)
         {
             using (var client = new HttpClient())
             {
@@ -27,17 +27,8 @@ namespace Annexio.Controllers.HttpClients
                 if (!responseTask.IsSuccessStatusCode)
                     throw new InvalidOperationException(nameof(responseTask));
 
-                var result = await responseTask.Content.ReadAsStringAsync();
-                var listOfCountries = JsonConvert.DeserializeObject<IEnumerable<Country>>(result);
-                var region = new Region
-                    {
-                        Name = regionName,
-                        Population = listOfCountries.Select(p => p.Population).Sum(),
-                        Countries = listOfCountries,
-                        Subregions = listOfCountries.Select(s => s.Subregion).Distinct()
-                    };
-
-                return region;
+               var result = await responseTask.Content.ReadAsStringAsync();
+               return JsonConvert.DeserializeObject<IEnumerable<Country>>(result);                
             }
         }
     }

@@ -1,6 +1,7 @@
 ﻿using Annexio.Controllers.HttpClients;
 using Annexio.Models;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Annexio.Repository.Manager
@@ -16,7 +17,16 @@ namespace Annexio.Repository.Manager
 
         public async Task<Region> GetRegionDetails(string regionName)
         {
-            return  await _regionsHttpClient.GetRegionDetailsAsync(regionName);
+            var listOfCountries = await _regionsHttpClient.GetRegionDetailsAsync(regionName);
+            var region = new Region
+            {
+                Name = regionName,
+                Population = listOfCountries.Select(p => p.Population).Sum(),
+                Countries = listOfCountries,
+                Subregions = listOfCountries.Select(s => s.Subregion).Distinct()
+            };
+
+            return region;
         }
 
     }

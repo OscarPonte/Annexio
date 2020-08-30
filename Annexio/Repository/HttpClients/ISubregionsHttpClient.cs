@@ -1,10 +1,11 @@
 ﻿using Annexio.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Annexio.Controllers.HttpClients
 {
     public interface ISubregionsHttpClient
     {
-        Task<Subregion> GetSubregionDetailsAsync(string subregionName);
+        Task<IEnumerable<Country>> GetSubregionDetailsAsync(string subregionName);
     }
 }

@@ -25,7 +25,7 @@ namespace Annexio.Controllers.HttpClients
             {
                 var responseTask = await client.GetAsync(_countriesUriBuilder.GetAllCountries());
 
-                if (responseTask.IsSuccessStatusCode)
+                if (!responseTask.IsSuccessStatusCode)
                     throw new InvalidOperationException(nameof(responseTask));
 
                 return await responseTask.Content.ReadAsAsync<IEnumerable<Country>>();              

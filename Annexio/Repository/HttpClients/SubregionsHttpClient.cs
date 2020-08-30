@@ -3,7 +3,6 @@ using Annexio.Repository.CountriesUriBuilder;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -18,7 +17,7 @@ namespace Annexio.Controllers.HttpClients
             this._countriesUriBuilder = countriesUriBuilder ?? throw new ArgumentNullException(nameof(countriesUriBuilder));
         }
 
-        public async Task<Subregion> GetSubregionDetailsAsync(string subregionName)
+        public async Task<IEnumerable<Country>> GetSubregionDetailsAsync(string subregionName)
         {
             using (var client = new HttpClient())
             {
@@ -28,16 +27,7 @@ namespace Annexio.Controllers.HttpClients
                     throw new InvalidOperationException(nameof(responseTask));
 
                 var result = await responseTask.Content.ReadAsStringAsync();
-                var listOfCountries = JsonConvert.DeserializeObject<IEnumerable<Country>>(result);
-                var subregion = new Subregion
-                    {
-                        Name = subregionName,
-                        Population = listOfCountries.Select(p => p.Population).Sum(),
-                        Region = listOfCountries.Select(r => r.Region).FirstOrDefault(),
-                        Countries = listOfCountries
-                    };
-
-                return subregion;
+                return JsonConvert.DeserializeObject<IEnumerable<Country>>(result);
             }
         }
     }
