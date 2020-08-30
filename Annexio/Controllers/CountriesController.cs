@@ -14,9 +14,9 @@ namespace Annexio.Controllers
             this._countriesManager = countriesManager ?? throw new ArgumentNullException(nameof(countriesManager));
         }
 
-        public async Task<ViewResult> Index()
+        public /*async Task<*/ViewResult/*>*/ Index()
         {
-            return View(await _countriesManager.GetAllCountries());
+            return View(/*await _countriesManager.GetAllCountries()*/);
         }
 
         public async Task<ViewResult> Details(string name)
