@@ -22,12 +22,12 @@ namespace Annexio.Repository.Manager
 
         public async Task<Country> GetCountryDetailsByName(string name)
         {
-           return await _countriesHttpClient.GetCountryByNameAsync(name);             
+            return await _countriesHttpClient.GetCountryByNameAsync(name);
         }
 
         public async Task<Country> GetCountryDetailsByCode(string code)
         {
-           return await _countriesHttpClient.GetCountryByCodeAsync(code);
+            return await _countriesHttpClient.GetCountryByCodeAsync(code);
         }
 
     }

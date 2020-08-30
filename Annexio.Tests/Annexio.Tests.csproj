@@ -127,6 +127,9 @@
     <Compile Include="Controllers\RegionsControllerTest.cs" />
     <Compile Include="Controllers\SubregionsControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Manager\CountriesManagerTest.cs" />
+    <Compile Include="Repository\Manager\RegionsManagerTest.cs" />
+    <Compile Include="Repository\Manager\SubregionsManagerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
@@ -142,7 +145,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repository\CountriesUriBuilder\" />
-    <Folder Include="Repository\Manager\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
