@@ -127,6 +127,7 @@
     <Compile Include="Controllers\RegionsControllerTest.cs" />
     <Compile Include="Controllers\SubregionsControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\UriBuilder\CountriesUriBuilderTest.cs" />
     <Compile Include="Repository\Manager\CountriesManagerTest.cs" />
     <Compile Include="Repository\Manager\RegionsManagerTest.cs" />
     <Compile Include="Repository\Manager\SubregionsManagerTest.cs" />
@@ -143,9 +144,7 @@
       <Name>Annexio</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repository\CountriesUriBuilder\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
