@@ -19,6 +19,8 @@ namespace Annexio
 			container.RegisterType<ISubregionsHttpClient, SubregionsHttpClient>();
 			container.RegisterType<ICountriesUriBuilder, CountriesUriBuilder>();
 			container.RegisterType<ICountriesManager, CountriesManager>();
+			container.RegisterType<IRegionsManager, RegionsManager>();
+
 
 
 

@@ -8,32 +8,26 @@ namespace Annexio.Controllers
 {
     public class CountriesController : Controller
     {
-        private readonly ICountriesManager countriesManager;
+        private readonly ICountriesManager _countriesManager;
 
         public CountriesController(ICountriesManager countries)
         {
-            this.countriesManager = countries ?? throw new ArgumentNullException();
+            this._countriesManager = countries ?? throw new ArgumentNullException();
         }
 
         public async Task<ViewResult> Index()
-        {
-            var countries = await countriesManager.GetAllCountries();
-
-            return View(countries);
+        {         
+            return View(await _countriesManager.GetAllCountries());
         }
 
         public async Task<ViewResult> Details(string name)
-        {
-            var country = await countriesManager.GetCountryDetailsByName(name);
-
-            return View(country);
+        {           
+            return View(await _countriesManager.GetCountryDetailsByName(name));
         }
 
         public async Task<ViewResult> DetailsByCode(string code)
         {
-            var country = await countriesManager.GetCountryDetailsByCode(code);
-
-            return View(country);
+            return View( await _countriesManager.GetCountryDetailsByCode(code));
         }
     }
 }

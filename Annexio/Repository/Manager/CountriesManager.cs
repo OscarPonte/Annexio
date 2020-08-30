@@ -17,22 +17,17 @@ namespace Annexio.Repository.Manager
 
         public async Task<IEnumerable<Country>> GetAllCountries()
         {
-            var countries = await _countriesHttpClient.GetCountriesAsync();
-
-            return countries;
+            return await _countriesHttpClient.GetCountriesAsync();
         }
 
         public async Task<Country> GetCountryDetailsByName(string name)
         {
-            var countries = await _countriesHttpClient.GetCountryByNameAsync(name);
-
-            return countries;
+           return await _countriesHttpClient.GetCountryByNameAsync(name);             
         }
+
         public async Task<Country> GetCountryDetailsByCode(string code)
         {
-            var countries = await _countriesHttpClient.GetCountryByCodeAsync(code);
-
-            return countries;
+           return await _countriesHttpClient.GetCountryByCodeAsync(code);
         }
 
     }

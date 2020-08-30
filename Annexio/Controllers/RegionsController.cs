@@ -1,4 +1,5 @@
 ﻿using Annexio.Controllers.HttpClients;
+using Annexio.Repository.Manager;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -6,17 +7,15 @@ namespace Annexio.Controllers
 {
     public class RegionsController : Controller
     {
-        private readonly IRegionsHttpClient regionsHttpClient;
-        public RegionsController(IRegionsHttpClient regions)
+        private readonly IRegionsManager _regionsManager;
+        public RegionsController(IRegionsManager regions)
         {
-            this.regionsHttpClient = regions;
+            this._regionsManager = regions;
         }
 
         public async Task<ViewResult> RegionDetails(string regionName)
-        {
-            var region = await regionsHttpClient.GetRegionDetailsAsync(regionName);
-
-            return View(region);
+        {            
+            return View(await _regionsManager.GetRegionDetails(regionName));
         }
 
     }
