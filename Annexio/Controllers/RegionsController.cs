@@ -6,9 +6,15 @@ namespace Annexio.Controllers
 {
     public class RegionsController : Controller
     {
+        private readonly IRegionsHttpClient regionsHttpClient;
+        public RegionsController(IRegionsHttpClient regions)
+        {
+            this.regionsHttpClient = regions;
+        }
+
         public async Task<ViewResult> RegionDetails(string regionName)
         {
-            var region = await new RegionsHttpClient().GetRegionDetailsAsync(regionName);
+            var region = await regionsHttpClient.GetRegionDetailsAsync(regionName);
 
             return View(region);
         }

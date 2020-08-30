@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Annexio.Controllers.HttpClients
 {
-    public class RegionsHttpClient
+    public class RegionsHttpClient : IRegionsHttpClient
     {
         private readonly CountriesUriBuilder _uri;
         public RegionsHttpClient()
