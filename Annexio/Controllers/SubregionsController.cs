@@ -1,4 +1,5 @@
 ﻿using Annexio.Controllers.HttpClients;
+using Annexio.Repository.Manager;
 using System;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -7,16 +8,16 @@ namespace Annexio.Controllers
 {
     public class SubregionsController : Controller
     {
-        private readonly ISubregionsHttpClient subregionsHttpClient;
-        public SubregionsController(ISubregionsHttpClient subregions)
-        {
-            this.subregionsHttpClient = subregions ?? throw new ArgumentNullException();
-        }
-        public async Task<ViewResult> SubregionDetails(string subregionName)
-        {
-            var subregion = await subregionsHttpClient.GetSubregionDetailsAsync(subregionName);
+        private readonly ISubregionsManager _subregionsManager;
 
-            return View(subregion);
+        public SubregionsController(ISubregionsManager subregionsManager)
+        {
+            _subregionsManager = subregionsManager ?? throw new ArgumentNullException(nameof(subregionsManager));
+        }
+               
+        public async Task<ViewResult> SubregionDetails(string subregionName)
+        {            
+            return View(await _subregionsManager.GetSubregionDetails(subregionName));
         }
 
     }

@@ -173,7 +173,9 @@
     <Compile Include="Repository\Manager\CountriesManager.cs" />
     <Compile Include="Repository\Manager\ICountriesManager.cs" />
     <Compile Include="Repository\Manager\IRegionsManager.cs" />
+    <Compile Include="Repository\Manager\ISubregionsManager.cs" />
     <Compile Include="Repository\Manager\RegionsManager.cs" />
+    <Compile Include="Repository\Manager\SubregionsManager.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

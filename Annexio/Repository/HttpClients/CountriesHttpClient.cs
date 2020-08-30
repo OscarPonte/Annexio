@@ -6,26 +6,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 
 namespace Annexio.Controllers.HttpClients
 {
     public class CountriesHttpClient : ICountriesHttpClient
     {
-        private readonly ICountriesUriBuilder countriesUriBuilder;
+        private readonly ICountriesUriBuilder _countriesUriBuilder;
 
-        public CountriesHttpClient(ICountriesUriBuilder countriesUri)
+        public CountriesHttpClient(ICountriesUriBuilder countriesUriBuilder)
         {
-            this.countriesUriBuilder = countriesUri ?? throw new ArgumentNullException();
+            this._countriesUriBuilder = countriesUriBuilder ?? throw new ArgumentNullException(nameof(countriesUriBuilder));
         }
 
         public async Task<IEnumerable<Country>> GetCountriesAsync()
         {
             using (var client = new HttpClient())
             {
-                var responseTask = await client.GetAsync(countriesUriBuilder.GetAllCountries());
+                var responseTask = await client.GetAsync(_countriesUriBuilder.GetAllCountries());
 
-                if (!responseTask.IsSuccessStatusCode)
-                    throw new ArgumentNullException();
+                if (responseTask.IsSuccessStatusCode)
+                    throw new InvalidOperationException(nameof(responseTask));
 
                 return await responseTask.Content.ReadAsAsync<IEnumerable<Country>>();              
             }
@@ -35,10 +36,10 @@ namespace Annexio.Controllers.HttpClients
         {
             using (var client = new HttpClient())
             {
-                var responseTask = await client.GetAsync(countriesUriBuilder.GetCountryByName(name));
+                var responseTask = await client.GetAsync(_countriesUriBuilder.GetCountryByName(name));
 
-                if (!responseTask.IsSuccessStatusCode)                
-                    throw new ArgumentNullException();
+                if (!responseTask.IsSuccessStatusCode)
+                    throw new InvalidOperationException(nameof(responseTask));
 
                 var result = await responseTask.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<List<Country>>(result).FirstOrDefault();                
@@ -49,10 +50,10 @@ namespace Annexio.Controllers.HttpClients
         {
             using (var client = new HttpClient())
             {
-                var responseTask = await client.GetAsync(countriesUriBuilder.GetCountryByCode(code));
+                var responseTask = await client.GetAsync(_countriesUriBuilder.GetCountryByCode(code));
 
-                if (!responseTask.IsSuccessStatusCode)                
-                    throw new ArgumentNullException();
+                if (!responseTask.IsSuccessStatusCode)
+                    throw new InvalidOperationException(nameof(responseTask));
 
                 var result = await responseTask.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<Country>(result);             

@@ -10,9 +10,9 @@ namespace Annexio.Repository.Manager
     {
         private readonly ICountriesHttpClient _countriesHttpClient;
 
-        public CountriesManager(ICountriesHttpClient countries)
+        public CountriesManager(ICountriesHttpClient countriesHttpClient)
         {
-            this._countriesHttpClient = countries ?? throw new ArgumentNullException();
+            this._countriesHttpClient = countriesHttpClient ?? throw new ArgumentNullException(nameof(countriesHttpClient));
         }
 
         public async Task<IEnumerable<Country>> GetAllCountries()

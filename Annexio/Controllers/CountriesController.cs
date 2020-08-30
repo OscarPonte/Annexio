@@ -10,9 +10,9 @@ namespace Annexio.Controllers
     {
         private readonly ICountriesManager _countriesManager;
 
-        public CountriesController(ICountriesManager countries)
+        public CountriesController(ICountriesManager countriesManager)
         {
-            this._countriesManager = countries ?? throw new ArgumentNullException();
+            this._countriesManager = countriesManager ?? throw new ArgumentNullException(nameof(countriesManager));
         }
 
         public async Task<ViewResult> Index()

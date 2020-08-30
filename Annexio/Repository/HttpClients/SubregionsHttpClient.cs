@@ -11,21 +11,21 @@ namespace Annexio.Controllers.HttpClients
 {
     public class SubregionsHttpClient : ISubregionsHttpClient
     {
-        private readonly ICountriesUriBuilder countriesUriBuilder;
+        private readonly ICountriesUriBuilder _countriesUriBuilder;
 
-        public SubregionsHttpClient(ICountriesUriBuilder countriesUri)
+        public SubregionsHttpClient(ICountriesUriBuilder countriesUriBuilder)
         {
-            this.countriesUriBuilder = countriesUri ?? throw new ArgumentNullException();
+            this._countriesUriBuilder = countriesUriBuilder ?? throw new ArgumentNullException(nameof(countriesUriBuilder));
         }
 
         public async Task<Subregion> GetSubregionDetailsAsync(string subregionName)
         {
             using (var client = new HttpClient())
             {
-                var responseTask = await client.GetAsync(countriesUriBuilder.GetSubregion(subregionName));
+                var responseTask = await client.GetAsync(_countriesUriBuilder.GetSubregion(subregionName));
 
                 if (!responseTask.IsSuccessStatusCode)
-                    throw new ArgumentNullException();       
+                    throw new InvalidOperationException(nameof(responseTask));
 
                 var result = await responseTask.Content.ReadAsStringAsync();
                 var listOfCountries = JsonConvert.DeserializeObject<IEnumerable<Country>>(result);

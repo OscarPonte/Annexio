@@ -20,6 +20,7 @@ namespace Annexio
 			container.RegisterType<ICountriesUriBuilder, CountriesUriBuilder>();
 			container.RegisterType<ICountriesManager, CountriesManager>();
 			container.RegisterType<IRegionsManager, RegionsManager>();
+			container.RegisterType<ISubregionsManager, SubregionsManager>();
 
 
 

@@ -9,7 +9,7 @@ namespace Annexio.CountiresUriBuilder
 
         public CountriesUriBuilder()
         {
-            this._uriBuilder = new UriBuilder(Resources.UrlString);
+            this._uriBuilder = new UriBuilder(Resources.UrlString) ?? throw new ArgumentNullException(nameof(UriBuilder));
         }
 
         public Uri GetAllCountries()

@@ -9,9 +9,9 @@ namespace Annexio.Repository.Manager
     {
         private readonly IRegionsHttpClient _regionsHttpClient;
 
-        public RegionsManager(IRegionsHttpClient regions)
+        public RegionsManager(IRegionsHttpClient regionsHttpClient)
         {
-            this._regionsHttpClient = regions ?? throw new ArgumentNullException();
+            this._regionsHttpClient = regionsHttpClient ?? throw new ArgumentNullException(nameof(regionsHttpClient));
         }
 
         public async Task<Region> GetRegionDetails(string regionName)
