@@ -1,5 +1,6 @@
 ﻿using Annexio.CountiresUriBuilder;
 using Annexio.Models;
+using Annexio.Repository.CountriesUriBuilder;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,18 +12,18 @@ namespace Annexio.Controllers.HttpClients
 {
     public class CountriesHttpClient : ICountriesHttpClient
     {
-        private readonly CountriesUriBuilder _uri;
+        private readonly ICountriesUriBuilder countriesUriBuilder;
 
-        public CountriesHttpClient()
+        public CountriesHttpClient(ICountriesUriBuilder countriesUri)
         {
-            _uri = new CountriesUriBuilder();
+            this.countriesUriBuilder = countriesUri;
         }
 
         public async Task<IEnumerable<Country>> GetCountriesAsync()
         {
             using (var client = new HttpClient())
             {
-                var responseTask = await client.GetAsync(_uri.GetAllCountries());
+                var responseTask = await client.GetAsync(countriesUriBuilder.GetAllCountries());
 
                 if (responseTask.IsSuccessStatusCode)
                 {
@@ -40,7 +41,7 @@ namespace Annexio.Controllers.HttpClients
 
             using (var client = new HttpClient())
             {
-                var responseTask = await client.GetAsync(_uri.GetCountryByName(name));
+                var responseTask = await client.GetAsync(countriesUriBuilder.GetCountryByName(name));
 
                 if (responseTask.IsSuccessStatusCode)
                 {
@@ -58,7 +59,7 @@ namespace Annexio.Controllers.HttpClients
         {
             using (var client = new HttpClient())
             {
-                var responseTask = await client.GetAsync(_uri.GetCountryByCode(code));
+                var responseTask = await client.GetAsync(countriesUriBuilder.GetCountryByCode(code));
 
                 if (responseTask.IsSuccessStatusCode)
                 {
