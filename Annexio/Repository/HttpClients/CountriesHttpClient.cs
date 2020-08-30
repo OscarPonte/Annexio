@@ -1,5 +1,4 @@
-﻿using Annexio.CountiresUriBuilder;
-using Annexio.Models;
+﻿using Annexio.Models;
 using Annexio.Repository.CountriesUriBuilder;
 using Newtonsoft.Json;
 using System;
@@ -16,7 +15,7 @@ namespace Annexio.Controllers.HttpClients
 
         public CountriesHttpClient(ICountriesUriBuilder countriesUri)
         {
-            this.countriesUriBuilder = countriesUri;
+            this.countriesUriBuilder = countriesUri ?? throw new ArgumentNullException();
         }
 
         public async Task<IEnumerable<Country>> GetCountriesAsync()
@@ -25,33 +24,24 @@ namespace Annexio.Controllers.HttpClients
             {
                 var responseTask = await client.GetAsync(countriesUriBuilder.GetAllCountries());
 
-                if (responseTask.IsSuccessStatusCode)
-                {
-                    return await responseTask.Content.ReadAsAsync<IEnumerable<Country>>();
-                }
-                else
-                {
+                if (!responseTask.IsSuccessStatusCode)
                     throw new ArgumentNullException();
-                }
+
+                return await responseTask.Content.ReadAsAsync<IEnumerable<Country>>();              
             }
         }
 
         public async Task<Country> GetCountryByNameAsync(string name)
         {
-
             using (var client = new HttpClient())
             {
                 var responseTask = await client.GetAsync(countriesUriBuilder.GetCountryByName(name));
 
-                if (responseTask.IsSuccessStatusCode)
-                {
-                    var result = await responseTask.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<List<Country>>(result).FirstOrDefault();
-                }
-                else
-                {
+                if (!responseTask.IsSuccessStatusCode)                
                     throw new ArgumentNullException();
-                }
+
+                var result = await responseTask.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<Country>>(result).FirstOrDefault();                
             }
         }
 
@@ -61,21 +51,17 @@ namespace Annexio.Controllers.HttpClients
             {
                 var responseTask = await client.GetAsync(countriesUriBuilder.GetCountryByCode(code));
 
-                if (responseTask.IsSuccessStatusCode)
-                {
-                    var result = await responseTask.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<Country>(result);
-                }
-                else
-                {
+                if (!responseTask.IsSuccessStatusCode)                
                     throw new ArgumentNullException();
-                }
+
+                var result = await responseTask.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Country>(result);             
             }
         }
 
-      
 
-      
+
+
 
 
     }

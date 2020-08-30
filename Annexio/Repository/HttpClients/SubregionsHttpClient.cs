@@ -1,5 +1,5 @@
-﻿using Annexio.CountiresUriBuilder;
-using Annexio.Models;
+﻿using Annexio.Models;
+using Annexio.Repository.CountriesUriBuilder;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,35 +11,33 @@ namespace Annexio.Controllers.HttpClients
 {
     public class SubregionsHttpClient : ISubregionsHttpClient
     {
-        private readonly CountriesUriBuilder _uri;
-        public SubregionsHttpClient()
+        private readonly ICountriesUriBuilder countriesUriBuilder;
+
+        public SubregionsHttpClient(ICountriesUriBuilder countriesUri)
         {
-            _uri = new CountriesUriBuilder();
+            this.countriesUriBuilder = countriesUri ?? throw new ArgumentNullException();
         }
 
         public async Task<Subregion> GetSubregionDetailsAsync(string subregionName)
         {
             using (var client = new HttpClient())
             {
-                var responseTask = await client.GetAsync(_uri.GetSubregion(subregionName));
+                var responseTask = await client.GetAsync(countriesUriBuilder.GetSubregion(subregionName));
 
-                if (responseTask.IsSuccessStatusCode)
-                {
-                    var result = await responseTask.Content.ReadAsStringAsync();
-                    var listOfCountries = JsonConvert.DeserializeObject<IEnumerable<Country>>(result);
-                    var subregion = new Subregion
+                if (!responseTask.IsSuccessStatusCode)
+                    throw new ArgumentNullException();       
+
+                var result = await responseTask.Content.ReadAsStringAsync();
+                var listOfCountries = JsonConvert.DeserializeObject<IEnumerable<Country>>(result);
+                var subregion = new Subregion
                     {
                         Name = subregionName,
                         Population = listOfCountries.Select(p => p.Population).Sum(),
                         Region = listOfCountries.Select(r => r.Region).FirstOrDefault(),
                         Countries = listOfCountries
                     };
-                    return subregion;
-                }
-                else
-                {
-                    throw new ArgumentNullException();
-                }
+
+                return subregion;
             }
         }
     }

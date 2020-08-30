@@ -170,6 +170,8 @@
     <Compile Include="Models\Subregion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\CountriesUriBuilder\CountriesUriBuilder.cs" />
+    <Compile Include="Repository\Manager\CountriesManager.cs" />
+    <Compile Include="Repository\Manager\ICountriesManager.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -1,5 +1,5 @@
-﻿using Annexio.CountiresUriBuilder;
-using Annexio.Models;
+﻿using Annexio.Models;
+using Annexio.Repository.CountriesUriBuilder;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,35 +11,33 @@ namespace Annexio.Controllers.HttpClients
 {
     public class RegionsHttpClient : IRegionsHttpClient
     {
-        private readonly CountriesUriBuilder _uri;
-        public RegionsHttpClient()
+        private readonly ICountriesUriBuilder countriesUriBuilder;
+
+        public RegionsHttpClient(ICountriesUriBuilder countriesUri)
         {
-            _uri = new CountriesUriBuilder();
+            this.countriesUriBuilder = countriesUri ?? throw new ArgumentNullException();
         }
 
         public async Task<Region> GetRegionDetailsAsync(string regionName)
         {
             using (var client = new HttpClient())
             {
-                var responseTask = await client.GetAsync(_uri.GetRegion(regionName));
+                var responseTask = await client.GetAsync(countriesUriBuilder.GetRegion(regionName));
 
-                if (responseTask.IsSuccessStatusCode)
-                {
-                    var result = await responseTask.Content.ReadAsStringAsync();
-                    var listOfCountries = JsonConvert.DeserializeObject<IEnumerable<Country>>(result);
-                    var region = new Region
+                if (!responseTask.IsSuccessStatusCode)
+                    throw new ArgumentNullException();  
+
+                var result = await responseTask.Content.ReadAsStringAsync();
+                var listOfCountries = JsonConvert.DeserializeObject<IEnumerable<Country>>(result);
+                var region = new Region
                     {
                         Name = regionName,
                         Population = listOfCountries.Select(p => p.Population).Sum(),
                         Countries = listOfCountries,
                         Subregions = listOfCountries.Select(s => s.Subregion).Distinct()
                     };
-                    return region;
-                }
-                else
-                {
-                    throw new ArgumentNullException();
-                }
+
+                return region;
             }
         }
     }
