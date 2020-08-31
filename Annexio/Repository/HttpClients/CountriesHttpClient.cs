@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web.UI.WebControls;
 
 namespace Annexio.Controllers.HttpClients
 {
@@ -28,7 +27,7 @@ namespace Annexio.Controllers.HttpClients
                 if (!responseTask.IsSuccessStatusCode)
                     throw new InvalidOperationException(nameof(responseTask));
 
-                return await responseTask.Content.ReadAsAsync<IEnumerable<Country>>();              
+                return await responseTask.Content.ReadAsAsync<IEnumerable<Country>>();
             }
         }
 
@@ -42,7 +41,7 @@ namespace Annexio.Controllers.HttpClients
                     throw new InvalidOperationException(nameof(responseTask));
 
                 var result = await responseTask.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<List<Country>>(result).FirstOrDefault();                
+                return JsonConvert.DeserializeObject<IEnumerable<Country>>(result).FirstOrDefault();
             }
         }
 
@@ -56,7 +55,7 @@ namespace Annexio.Controllers.HttpClients
                     throw new InvalidOperationException(nameof(responseTask));
 
                 var result = await responseTask.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<Country>(result);             
+                return JsonConvert.DeserializeObject<Country>(result);
             }
         }
 
