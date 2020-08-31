@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     $("#countries").DataTable({
         ajax: {
-            url: "/api/countries",
+            url: "api/countries",
             dataSrc: ""
         },
         columns: [
