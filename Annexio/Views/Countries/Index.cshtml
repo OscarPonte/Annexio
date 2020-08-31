@@ -3,8 +3,8 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<table id="countries" class="table table-bordered table-hover">
+<hr />
+<table id="countries" class="table table-bordered">
     <thead>
         <tr>
             <th>
@@ -19,34 +19,10 @@
         </tr>
     </thead>
     <tbody>
-       
     </tbody>
 </table>
 
 @section scripts
 {
-    <script>
-        $(document).ready(function () {
-            $("#countries").DataTable({
-                ajax: {
-                    url: "/api/countries",
-                    dataSrc: ""
-                },
-                columns: [
-                    {
-                        data: "name"
-                    },
-                    {
-                        data: "region"
-                    },
-                    {
-                        data: "subregion"
-                    }
-                ]
-
-            });
-
-        });
-
-    </script>
-    }
+    @Scripts.Render("~/Scripts/countries.datatable.js")
+}

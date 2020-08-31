@@ -14,19 +14,29 @@ namespace Annexio.Controllers
             this._countriesManager = countriesManager ?? throw new ArgumentNullException(nameof(countriesManager));
         }
 
-        public /*async Task<*/ViewResult/*>*/ Index()
+        public ViewResult Index()
         {
-            return View(/*await _countriesManager.GetAllCountries()*/);
+            return View();
         }
 
-        public async Task<ViewResult> Details(string name)
+        public async Task<ActionResult> Details(string name)
         {
-            return View(await _countriesManager.GetCountryDetailsByName(name));
+            var country = await _countriesManager.GetCountryDetailsByName(name);
+
+            if (country == null)
+                return HttpNotFound();
+
+            return View(country);
         }
 
-        public async Task<ViewResult> DetailsByCode(string code)
+        public async Task<ActionResult> DetailsByCode(string code)
         {
-            return View(await _countriesManager.GetCountryDetailsByCode(code));
+            var country = await _countriesManager.GetCountryDetailsByCode(code);
+
+            if (country == null)
+                return HttpNotFound();
+
+            return View(country);
         }
     }
 }
