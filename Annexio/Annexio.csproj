@@ -166,7 +166,6 @@
     <Compile Include="App_Start\UnityResolver.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CountriesController.cs" />
-    <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Models\Dtos\CountryDto.cs" />
     <Compile Include="Repository\CountriesUriBuilder\ICountriesUriBuilder.cs" />
     <Compile Include="Repository\HttpClients\CountriesHttpClient.cs" />

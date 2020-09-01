@@ -20,11 +20,19 @@ namespace Annexio.Tests.Controllers
         }
 
         [Test]
-        public void RegionsController_RegionDetails_ReturnsATaskOfViewResult()
+        public void RegionsController_RegionDetails_ReturnsATaskOfActionResult()
         {
             var result = _controller.RegionDetails("RegionName");
 
-            Assert.IsInstanceOf<Task<ViewResult>>(result);
+            Assert.IsInstanceOf<Task<ActionResult>>(result);
+        }
+
+        [Test]
+        public void RegionsController_RegionDetails_ReturnsAHttpNotFoundResult()
+        {
+            var result = _controller.RegionDetails(null).Result;
+
+            Assert.IsInstanceOf<HttpNotFoundResult>(result);
         }
 
         [Test]

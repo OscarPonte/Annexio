@@ -16,9 +16,14 @@ namespace Annexio.Controllers
             _subregionsManager = subregionsManager ?? throw new ArgumentNullException(nameof(subregionsManager));
         }
 
-        public async Task<ViewResult> SubregionDetails(string subregionName)
+        public async Task<ActionResult> SubregionDetails(string subregionName)
         {
-            return View(await _subregionsManager.GetSubregionDetails(subregionName));
+            var subregion = await _subregionsManager.GetSubregionDetails(subregionName);
+
+            if (subregion == null)
+                return HttpNotFound();
+
+            return View(subregion);
         }
 
     }

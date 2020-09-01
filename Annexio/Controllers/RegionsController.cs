@@ -15,9 +15,14 @@ namespace Annexio.Controllers
             this._regionsManager = regionsManager ?? throw new ArgumentNullException(nameof(regionsManager));
         }
 
-        public async Task<ViewResult> RegionDetails(string regionName)
+        public async Task<ActionResult> RegionDetails(string regionName)
         {
-            return View(await _regionsManager.GetRegionDetails(regionName));
+            var region = await _regionsManager.GetRegionDetails(regionName);
+
+            if (region == null)
+                return HttpNotFound();
+
+            return View(region);
         }
 
     }

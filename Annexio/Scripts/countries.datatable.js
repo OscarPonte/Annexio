@@ -1,5 +1,12 @@
 ﻿$(document).ready(function () {
-    $("#countries").DataTable({
+      
+    $.fn.dataTable.ext.errMode = 'none';
+
+    $("#countries")
+        .on('error.dt', function () {
+        window.location.href = "~/404.html";
+    })
+        .DataTable({
         ajax: {
             url: "countries/getcountries/",
             dataSrc: ""
@@ -28,3 +35,4 @@
     });
 
 });
+

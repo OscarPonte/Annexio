@@ -27,9 +27,6 @@ namespace Annexio.Controllers
         {
             var countries = await _countriesManager.GetAllCountries();
 
-            if (countries == null)
-                return HttpNotFound();
-
             return Content(new JavaScriptSerializer().Serialize(countries));
         }
 
