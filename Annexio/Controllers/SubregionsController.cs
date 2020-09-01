@@ -2,9 +2,11 @@
 using System;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace Annexio.Controllers
 {
+    [OutputCache(Duration = 20, Location = OutputCacheLocation.Server, VaryByParam = "*")]
     public class SubregionsController : Controller
     {
         private readonly ISubregionsManager _subregionsManager;

@@ -1,5 +1,6 @@
 ﻿using Annexio.Controllers.HttpClients;
 using Annexio.Models;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,6 +18,9 @@ namespace Annexio.Repository.Manager
 
         public async Task<Subregion> GetSubregionDetails(string subregionName)
         {
+            if (subregionName.IsNullOrWhiteSpace())
+                throw new ArgumentNullException(nameof(subregionName));
+
             var listOfCountries = await _subregionsHttpClient.GetSubregionDetailsAsync(subregionName);
             var subregion = new Subregion
             {

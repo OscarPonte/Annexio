@@ -21,7 +21,7 @@ namespace Annexio.Tests.Repository.Manager
         [Test]
         public void RegionsManager_GetRegionDetails_ReturnsARegion()
         {
-            var result = _manager.GetRegionDetails("Name").Result;
+            var result = _manager.GetRegionDetails("regionName").Result;
 
             Assert.IsInstanceOf<Region>(result);
         }

@@ -20,27 +20,19 @@ namespace Annexio.Tests.Controllers
         }
 
         [Test]
-        public void CountriesController_Index_ReturnsATaskOfViewResult()
+        public void CountriesController_Index_ReturnsAViewResult()
         {
             var result = _controller.Index();
 
-            Assert.IsInstanceOf<Task<ViewResult>>(result);
+            Assert.IsInstanceOf<ViewResult>(result);
         }
 
         [Test]
-        public void CountriesController_Index_IsCallingGetAllCountriesMethod()
-        {
-            var result = _controller.Index();
-
-            _mock.Verify(c => c.GetAllCountries());
-        }
-
-        [Test]
-        public void CountriesController_Details_ReturnsATaskOfViewResult()
+        public void CountriesController_Details_ReturnsATaskOfActionResult()
         {
             var result = _controller.Details("CountryName");
 
-            Assert.IsInstanceOf<Task<ViewResult>>(result);
+            Assert.IsInstanceOf<Task<ActionResult>>(result);
         }
 
         [Test]
@@ -53,11 +45,11 @@ namespace Annexio.Tests.Controllers
         }
 
         [Test]
-        public void CountriesController_DetailsByCode_ReturnsATaskOfViewResult()
+        public void CountriesController_DetailsByCode_ReturnsATaskOfActionResult()
         {
             var result = _controller.DetailsByCode("CountryName");
 
-            Assert.IsInstanceOf<Task<ViewResult>>(result);
+            Assert.IsInstanceOf<Task<ActionResult>>(result);
         }
 
         [Test]

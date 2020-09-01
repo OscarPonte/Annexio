@@ -1,5 +1,6 @@
 ﻿using Annexio.Controllers.HttpClients;
 using Annexio.Models;
+using Annexio.Models.Dtos;
 using Annexio.Repository.Manager;
 using Moq;
 using NUnit.Framework;
@@ -22,11 +23,11 @@ namespace Annexio.Tests.Repository.Manager
         }
 
         [Test]
-        public void CountriesManager_GetAllCountries_ReturnsATaskIEnumerableOfCountry()
+        public void CountriesManager_GetAllCountriesDto_ReturnsATaskIEnumerableOfCountry()
         {
             var result = _manager.GetAllCountries();
 
-            Assert.IsInstanceOf<Task<IEnumerable<Country>>>(result);
+            Assert.IsInstanceOf<Task<IEnumerable<CountryDto>>>(result);
         }
 
         [Test]
