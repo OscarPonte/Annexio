@@ -2,9 +2,11 @@
 using System;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace Annexio.Controllers
 {
+    [OutputCache(Duration = 20, Location = OutputCacheLocation.Server, VaryByParam = "*")]
     public class SubregionsController : Controller
     {
         private readonly ISubregionsManager _subregionsManager;
@@ -14,9 +16,14 @@ namespace Annexio.Controllers
             _subregionsManager = subregionsManager ?? throw new ArgumentNullException(nameof(subregionsManager));
         }
 
-        public async Task<ViewResult> SubregionDetails(string subregionName)
+        public async Task<ActionResult> SubregionDetails(string subregionName)
         {
-            return View(await _subregionsManager.GetSubregionDetails(subregionName));
+            var subregion = await _subregionsManager.GetSubregionDetails(subregionName);
+
+            if (subregion == null)
+                return HttpNotFound();
+
+            return View(subregion);
         }
 
     }

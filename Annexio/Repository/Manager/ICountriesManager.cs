@@ -7,7 +7,7 @@ namespace Annexio.Repository.Manager
 {
     public interface ICountriesManager
     {
-        Task<IEnumerable<Country>> GetAllCountries();
+        Task<IEnumerable<CountryDto>> GetAllCountries();
         Task<Country> GetCountryDetailsByName(string name);
         Task<Country> GetCountryDetailsByCode(string code);
     }

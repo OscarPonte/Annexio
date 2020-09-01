@@ -58,11 +58,5 @@ namespace Annexio.Controllers.HttpClients
                 return JsonConvert.DeserializeObject<Country>(result);
             }
         }
-
-
-
-
-
-
     }
 }

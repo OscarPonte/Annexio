@@ -1,26 +1,33 @@
 ﻿$(document).ready(function () {
-    $("#countries").DataTable({
+      
+    $.fn.dataTable.ext.errMode = 'none';
+
+    $("#countries")
+        .on('error.dt', function () {
+        window.location.href = "~/404.html";
+    })
+        .DataTable({
         ajax: {
-            url: "api/countries",
+            url: "countries/getcountries/",
             dataSrc: ""
         },
         columns: [
             {
                 data: "name",
                 render: function (data, string, country) {
-                    return "<a href='/Countries/Details?Name=" + data + "'>" + data + "</a>";
+                    return "<a href='/Countries/Details?Name=" + country.Name + "'>" + country.Name + "</a>";
                 }
             },
             {
                 data: "region",
                 render: function (data, string, region) {
-                    return "<a href='/Regions/RegionDetails?regionName=" + data + "'>" + data + "</a>";
+                    return "<a href='/Regions/RegionDetails?regionName=" + region.Region + "'>" + region.Region + "</a>";
                 }
             },
             {
                 data: "subregion",
                 render: function (data, string, subregion) {
-                    return "<a href='/Subregions/SubregionDetails?subregionName=" + data + "'>" + data + "</a>";
+                    return "<a href='/Subregions/SubregionDetails?subregionName=" + subregion.Subregion + "'>" + subregion.Subregion + "</a>";
                 }
             }
         ]
@@ -28,3 +35,4 @@
     });
 
 });
+

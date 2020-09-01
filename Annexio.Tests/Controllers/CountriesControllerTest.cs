@@ -20,27 +20,43 @@ namespace Annexio.Tests.Controllers
         }
 
         [Test]
-        public void CountriesController_Index_ReturnsATaskOfViewResult()
+        public void CountriesController_Index_ReturnsAViewResult()
         {
             var result = _controller.Index();
 
-            Assert.IsInstanceOf<Task<ViewResult>>(result);
+            Assert.IsInstanceOf<ViewResult>(result);
         }
 
         [Test]
-        public void CountriesController_Index_IsCallingGetAllCountriesMethod()
+        public void CountriesController_GetCountries_ReturnsAContentResult()
         {
-            var result = _controller.Index();
+            var result = _controller.GetCountries().Result;
+
+            Assert.IsInstanceOf<ContentResult>(result);
+        }
+
+        [Test]
+        public void CountriesController_GetCountries_IsCallingGetAllCountriesMethod()
+        {
+            var result = _controller.GetCountries();
 
             _mock.Verify(c => c.GetAllCountries());
         }
 
         [Test]
-        public void CountriesController_Details_ReturnsATaskOfViewResult()
+        public void CountriesController_Details_ReturnsATaskOfActionResult()
         {
-            var result = _controller.Details("CountryName");
+            var result = _controller.Details("Name");
 
-            Assert.IsInstanceOf<Task<ViewResult>>(result);
+            Assert.IsInstanceOf<Task<ActionResult>>(result);
+        }
+
+        [Test]
+        public void CountriesController_Details_ReturnsAHttpNotFoundResult()
+        {
+            var result = _controller.Details(null).Result;
+
+            Assert.IsInstanceOf<HttpNotFoundResult>(result);
         }
 
         [Test]
@@ -53,11 +69,19 @@ namespace Annexio.Tests.Controllers
         }
 
         [Test]
-        public void CountriesController_DetailsByCode_ReturnsATaskOfViewResult()
+        public void CountriesController_DetailsByCode_ReturnsATaskOfActionResult()
         {
             var result = _controller.DetailsByCode("CountryName");
 
-            Assert.IsInstanceOf<Task<ViewResult>>(result);
+            Assert.IsInstanceOf<Task<ActionResult>>(result);
+        }
+
+        [Test]
+        public void CountriesController_DetailsByCode_ReturnsAHttpNotFoundResult()
+        {
+            var result = _controller.DetailsByCode(null).Result;
+
+            Assert.IsInstanceOf<HttpNotFoundResult>(result);
         }
 
         [Test]

@@ -20,11 +20,19 @@ namespace Annexio.Tests.Controllers
         }
 
         [Test]
-        public void SubregionsController_SubregionDetails_ReturnsATaskOfViewResult()
+        public void SubregionsController_SubregionDetails_ReturnsATaskOfActionResult()
         {
             var result = _controller.SubregionDetails("SubregionName");
 
-            Assert.IsInstanceOf<Task<ViewResult>>(result);
+            Assert.IsInstanceOf<Task<ActionResult>>(result);
+        }
+
+        [Test]
+        public void SubregionsController_SubregionDetails_ReturnsAHttpNotFoundResult()
+        {
+            var result = _controller.SubregionDetails(null).Result;
+
+            Assert.IsInstanceOf<HttpNotFoundResult>(result);
         }
 
         [Test]
