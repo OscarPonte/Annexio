@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace Annexio.Models
 {
@@ -10,7 +7,7 @@ namespace Annexio.Models
         public string Name { get; set; }
         public long Population { get; set; }
         public IEnumerable<Country> Countries { get; set; }
-        public IEnumerable<string> Subregions { get; set; }
+        public IEnumerable<string> Subregion { get; set; }
 
 
     }

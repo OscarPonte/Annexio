@@ -121,18 +121,18 @@
     <value>https://restcountries.eu</value>
   </data>
   <data name="UrlStringAll" xml:space="preserve">
-    <value>/rest/v2/all</value>
+    <value>rest/v2/all</value>
   </data>
   <data name="UrlStringCode" xml:space="preserve">
-    <value>/rest/v2/alpha/</value>
+    <value>rest/v2/alpha/</value>
   </data>
   <data name="UrlStringName" xml:space="preserve">
-    <value>/rest/v2/name/</value>
+    <value>rest/v2/name/</value>
   </data>
   <data name="UrlStringRegion" xml:space="preserve">
-    <value>/rest/v2/region/</value>
+    <value>rest/v2/region/</value>
   </data>
   <data name="UrlStringSubregion" xml:space="preserve">
-    <value>/rest/v2/subregion/</value>
+    <value>rest/v2/subregion/</value>
   </data>
 </root>

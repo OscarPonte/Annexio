@@ -22,7 +22,8 @@ namespace Annexio.Controllers.HttpClients
         {
             using (var client = new HttpClient())
             {
-                var responseTask = await client.GetAsync(_countriesUriBuilder.GetAllCountries());
+                _countriesUriBuilder.GetAllCountries();
+                var responseTask = await client.GetAsync(_countriesUriBuilder.GetFilterByModel(typeof(Country)));
 
                 if (!responseTask.IsSuccessStatusCode)
                     throw new InvalidOperationException(nameof(responseTask));
@@ -35,7 +36,8 @@ namespace Annexio.Controllers.HttpClients
         {
             using (var client = new HttpClient())
             {
-                var responseTask = await client.GetAsync(_countriesUriBuilder.GetCountryByName(name));
+                _countriesUriBuilder.GetCountryByName(name);
+                var responseTask = await client.GetAsync(_countriesUriBuilder.GetFilterByModel(typeof(Country)));
 
                 if (!responseTask.IsSuccessStatusCode)
                     throw new InvalidOperationException(nameof(responseTask));
@@ -49,7 +51,8 @@ namespace Annexio.Controllers.HttpClients
         {
             using (var client = new HttpClient())
             {
-                var responseTask = await client.GetAsync(_countriesUriBuilder.GetCountryByCode(code));
+                _countriesUriBuilder.GetCountryByCode(code);
+                var responseTask = await client.GetAsync(_countriesUriBuilder.GetFilterByModel(typeof(Country)));
 
                 if (!responseTask.IsSuccessStatusCode)
                     throw new InvalidOperationException(nameof(responseTask));

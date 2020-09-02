@@ -52,5 +52,12 @@ namespace Annexio.Tests.Repository.UriBuilder
             Assert.That(result, Is.EqualTo("https://restcountries.eu/rest/v2/subregion/Subregion"));
         }
 
+        [Test]
+        public void CountriesUriBuilder_GetFilterByModel_ReturnsAUriWhitAQueryToFilterTheResult()
+        {
+            var result = _uriBuilder.GetFilterByModel(typeof(string)).ToString();
+
+            Assert.That(result, Is.EqualTo("https://restcountries.eu/?fields=chars;length"));
+        }
     }
 }
