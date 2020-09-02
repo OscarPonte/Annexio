@@ -43,7 +43,7 @@
             @foreach (var subregion in Model.Subregion)
             {
                 <li>
-                    <a href=@Url.Action("SubregionDetails", "Subregion", new { subregionName = subregion }, null)>@subregion</a>
+                    <a href=@Url.Action("SubregionDetails", "Subregions", new { subregionName = subregion }, null)>@subregion</a>
                 </li>
             }
         </ul>
