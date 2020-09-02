@@ -23,7 +23,8 @@ namespace Annexio.Controllers.HttpClients
         {
             using (var client = new HttpClient())
             {
-                var responseTask = await client.GetAsync(_countriesUriBuilder.GetRegion(regionName));
+                _countriesUriBuilder.GetRegion(regionName);
+                var responseTask = await client.GetAsync(_countriesUriBuilder.GetFilterByModel(typeof(Region)));
 
                 if (!responseTask.IsSuccessStatusCode)
                     throw new InvalidOperationException(nameof(responseTask));

@@ -21,7 +21,8 @@ namespace Annexio.Controllers.HttpClients
         {
             using (var client = new HttpClient())
             {
-                var responseTask = await client.GetAsync(_countriesUriBuilder.GetSubregion(subregionName));
+                _countriesUriBuilder.GetSubregion(subregionName);
+                var responseTask = await client.GetAsync(_countriesUriBuilder.GetFilterByModel(typeof(Subregion)));
 
                 if (!responseTask.IsSuccessStatusCode)
                     throw new InvalidOperationException(nameof(responseTask));

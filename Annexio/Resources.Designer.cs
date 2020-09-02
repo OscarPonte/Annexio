@@ -70,7 +70,7 @@ namespace Annexio {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /rest/v2/all.
+        ///   Looks up a localized string similar to rest/v2/all.
         /// </summary>
         internal static string UrlStringAll {
             get {
@@ -79,7 +79,7 @@ namespace Annexio {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /rest/v2/alpha/.
+        ///   Looks up a localized string similar to rest/v2/alpha/.
         /// </summary>
         internal static string UrlStringCode {
             get {
@@ -88,7 +88,7 @@ namespace Annexio {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /rest/v2/name/.
+        ///   Looks up a localized string similar to rest/v2/name/.
         /// </summary>
         internal static string UrlStringName {
             get {
@@ -97,7 +97,7 @@ namespace Annexio {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /rest/v2/region/.
+        ///   Looks up a localized string similar to rest/v2/region/.
         /// </summary>
         internal static string UrlStringRegion {
             get {
@@ -106,7 +106,7 @@ namespace Annexio {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /rest/v2/subregion/.
+        ///   Looks up a localized string similar to rest/v2/subregion/.
         /// </summary>
         internal static string UrlStringSubregion {
             get {

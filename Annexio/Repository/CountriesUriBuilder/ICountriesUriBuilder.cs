@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Annexio.Repository.CountriesUriBuilder
 {
@@ -12,6 +8,8 @@ namespace Annexio.Repository.CountriesUriBuilder
         Uri GetCountryByName(string name);
         Uri GetCountryByCode(string code);
         Uri GetRegion(string region);
-        Uri GetSubregion(string subregion);   
+        Uri GetSubregion(string subregion);
+        Uri GetFilterByModel(Type type);
+
     }
 }

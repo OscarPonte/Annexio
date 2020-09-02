@@ -28,7 +28,7 @@ namespace Annexio.Repository.Manager
                 Name = regionName,
                 Population = listOfCountries.Select(p => p.Population).Sum(),
                 Countries = listOfCountries,
-                Subregions = listOfCountries.Select(s => s.Subregion).Distinct()
+                Subregion = listOfCountries.Select(s => s.Subregion).Distinct()
             };
 
             return region;
